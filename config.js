@@ -12,6 +12,8 @@ PREFIX: process.env.PREFIX || ".",
 BOT_NAME: process.env.BOT_NAME || "✦ CASEYRHODES ✦ XMD ✦",
 // add bot namw here for menu
 CUSTOM_REACT: process.env.CUSTOM_REACT || "false",
+//auto status react here
+AUTO_STATUS_REACT: process.env.AUTO_STATUS_REACT || "true",
 // make this true for custum emoji react    
 CUSTOM_REACT_EMOJIS: process.env.CUSTOM_REACT_EMOJIS || "💝,💖,💗,❤️‍🔥,❤️‍🩹,❤️,🩷,🧡,💛,💚,💙,🩵,💜,🤎,🖤,🤍",
 // chose custom react emojis by yourself 
