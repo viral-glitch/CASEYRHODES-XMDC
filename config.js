@@ -18,6 +18,8 @@ AUTO_STATUS_REACT: process.env.AUTO_STATUS_REACT || "true",
 CUSTOM_REACT_EMOJIS: process.env.CUSTOM_REACT_EMOJIS || "💝,💖,💗,❤️‍🔥,❤️‍🩹,❤️,🩷,🧡,💛,💚,💙,🩵,💜,🤎,🖤,🤍",
 // chose custom react emojis by yourself 
 DELETE_LINKS: process.env.DELETE_LINKS || "false",
+// true if want welcome and goodbye msg in groups    
+ADMIN_EVENTS: process.env.ADMIN_EVENTS || "false",
 // automatic delete links witho remove member 
 OWNER_NUMBER: process.env.OWNER_NUMBER || "254112192119",
 // add your bot owner number
