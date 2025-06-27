@@ -91,6 +91,12 @@
       "value": "*🎉👀 sᴇᴇɴ ʙʏ ᴄᴀsᴇʏʀʜᴏᴅᴇs xᴍᴅ🚀🔥*"
     }, 
 
+        "AUTO_STATUS_REACT": {
+      "description": "Make it true if want auto status react.",
+      "required": false,
+      "value": "true"  
+    },
+
     "OWNER_NAME": {
       "description": "Type Bot Owner Name.",
       "required": false,
