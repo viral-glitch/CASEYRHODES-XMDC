@@ -3,45 +3,41 @@ const FormData = require('form-data');
 const fs = require('fs');
 const os = require('os');
 const path = require("path");
-const { cmd } = require("../command");
+const { cmd, commands } = require("../command");
 
 cmd({
-  pattern: "tourl",
-  alias: ["imgtourl", "imgurl", "url", "geturl", "upload"],
-  react: '🖇',
-  desc: "Convert media to Catbox URL",
-  category: "utility",
-  use: ".tourl [reply to media]",
-  filename: __filename
+  'pattern': "tourl",
+  'alias': ["imgtourl", "imgurl", "url", "geturl", "upload"],
+  'react': '🖇',
+  'desc': "Convert media to Catbox URL",
+  'category': "utility",
+  'use': ".tourl [reply to media]",
+  'filename': __filename
 }, async (client, message, args, { reply }) => {
-  let tempFilePath;
   try {
-    // Get quoted message or self
+    // Check if quoted message exists and has media
     const quotedMsg = message.quoted ? message.quoted : message;
     const mimeType = (quotedMsg.msg || quotedMsg).mimetype || '';
-
+    
     if (!mimeType) {
-      throw "Please reply to an image, video, or audio file.";
+      throw "Please reply to an image, video, or audio file";
     }
 
-    // Download media and save temp file
+    // Download the media
     const mediaBuffer = await quotedMsg.download();
-    tempFilePath = path.join(os.tmpdir(), `catbox_upload_${Date.now()}`);
+    const tempFilePath = path.join(os.tmpdir(), `catbox_upload_${Date.now()}`);
     fs.writeFileSync(tempFilePath, mediaBuffer);
 
-    // Determine file extension
+    // Get file extension based on mime type
     let extension = '';
     if (mimeType.includes('image/jpeg')) extension = '.jpg';
     else if (mimeType.includes('image/png')) extension = '.png';
-    else if (mimeType.includes('image/webp')) extension = '.webp';
-    else if (mimeType.includes('image/gif')) extension = '.gif';
     else if (mimeType.includes('video')) extension = '.mp4';
     else if (mimeType.includes('audio')) extension = '.mp3';
-    if (!extension) extension = path.extname(tempFilePath) || '.bin';
-
+    
     const fileName = `file${extension}`;
 
-    // Prepare form for Catbox upload
+    // Prepare form data for Catbox
     const form = new FormData();
     form.append('fileToUpload', fs.createReadStream(tempFilePath), fileName);
     form.append('reqtype', 'fileupload');
@@ -51,40 +47,34 @@ cmd({
       headers: form.getHeaders()
     });
 
-    if (!response.data || !response.data.includes("https://")) {
-      throw "Upload failed. Catbox returned an unexpected response.";
+    if (!response.data) {
+      throw "Error uploading to Catbox";
     }
 
     const mediaUrl = response.data;
+    fs.unlinkSync(tempFilePath);
 
-    // Identify media type
+    // Determine media type for response
     let mediaType = 'File';
     if (mimeType.includes('image')) mediaType = 'Image';
     else if (mimeType.includes('video')) mediaType = 'Video';
     else if (mimeType.includes('audio')) mediaType = 'Audio';
 
-    // Reply in hacker style
+    // Send response
     await reply(
-      "```[ FILE UPLOAD SUCCESS ]```\n" +
-      "```========================```" + "\n" +
-      `📁 TYPE   : ${mediaType}\n` +
-      `📦 SIZE   : ${formatBytes(mediaBuffer.length)}\n` +
-      `🌐 LINK   :\n${mediaUrl}\n` +
-      "```========================```\n" +
-      `> Uploaded by : CASEYRHODES TECH 👻`
+      `*${mediaType} Uploaded Successfully*\n\n` +
+      `*Size:* ${formatBytes(mediaBuffer.length)}\n` +
+      `*URL:* ${mediaUrl}\n\n` +
+      `> © Uploaded by Dml 💜`
     );
 
   } catch (error) {
     console.error(error);
-    await reply(`❌ Error: ${error.message || error}`);
-  } finally {
-    if (tempFilePath && fs.existsSync(tempFilePath)) {
-      fs.unlinkSync(tempFilePath);
-    }
+    await reply(`Error: ${error.message || error}`);
   }
 });
 
-// Helper to format byte sizes
+// Helper function to format bytes
 function formatBytes(bytes) {
   if (bytes === 0) return '0 Bytes';
   const k = 1024;
