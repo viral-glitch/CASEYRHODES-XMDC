@@ -1,57 +1,80 @@
-const axios = require("axios");
-const config = require('../config');
 const { cmd } = require('../command');
+const crypto = require('crypto');
+const webp = require('node-webpmux');
+const axios = require('axios');
+const fs = require('fs-extra');
+const { exec } = require('child_process');
+const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
+const Config = require('../config');
 
-cmd({
-  pattern: "sss",
-  alias: ["screenweb"],
-  react: "💫",
-  desc: "Download screenshot of a given link.",
-  category: "other",
-  use: ".ss <link>",
-  filename: __filename,
-}, 
-async (conn, mek, m, {
-  from, l, quoted, body, isCmd, command, args, q, isGroup, sender, 
-  senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, 
-  groupMetadata, groupName, participants, isItzcp, groupAdmins, 
-  isBotAdmins, isAdmins, reply 
-}) => {
-  if (!q) {
-    return reply("براہ کرم اسکرین شاٹ لینے کے لیے ایک لنک فراہم کریں۔");
-  }
+// Take Sticker 
 
-  try {
-    const response = await axios.get(`https://api.diioffc.web.id/api/tools/sstab?url=${encodeURIComponent(q)}`);
-    console.log(response.data); // API response check karne ke liye
+cmd(
+    {
+        pattern: 'take',
+        alias: ['rename', 'stake'],
+        desc: 'Create a sticker with a custom pack name.',
+        category: 'sticker',
+        use: '<reply media or URL>',
+        filename: __filename,
+    },
+    async (conn, mek, m, { quoted, args, q, reply, from }) => {
+        if (!mek.quoted) return reply(`*Reply to any sticker.*`);
+        if (!q) return reply(`*Please provide a pack name using .take <packname>*`);
 
-    const screenshotUrl = response.data.result;
+        let mime = mek.quoted.mtype;
+        let pack = q;
 
-    if (!screenshotUrl) {
-        console.log("Screenshot URL not found in API response.");
-        return reply("اسکرین شاٹ کا URL نہیں ملا۔");
+        if (mime === "imageMessage" || mime === "stickerMessage") {
+            let media = await mek.quoted.download();
+            let sticker = new Sticker(media, {
+                pack: pack, 
+                type: StickerTypes.FULL,
+                categories: ["🤩", "🎉"],
+                id: "12345",
+                quality: 75,
+                background: 'transparent',
+            });
+            const buffer = await sticker.toBuffer();
+            return conn.sendMessage(mek.chat, { sticker: buffer }, { quoted: mek });
+        } else {
+            return reply("*Uhh, Please reply to an image.*");
+        }
     }
+);
 
-    console.log("Screenshot URL:", screenshotUrl); // Confirm karte hain URL ko
+//Sticker create 
 
-    const imageMessage = {
-      image: { url: screenshotUrl },
-      caption: "*📸 WEB SCREENSHOT DOWNLOADER*\n\n> *© Powered By CASEYRHODES*",
-      contextInfo: {
-        mentionedJid: [m.sender],
-        forwardingScore: 999,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: '120363302677217436@newsletter',
-          newsletterName: "CASEYRHODES XMD",
-          serverMessageId: 143,
-        },
-      },
-    };
+cmd(
+    {
+        pattern: 'sticker',
+        alias: ['s', 'stickergif'],
+        desc: 'Create a sticker from an image, video, or URL.',
+        category: 'sticker',
+        use: '<reply media or URL>',
+        filename: __filename,
+    },
+    async (conn, mek, m, { quoted, args, q, reply, from }) => {
+        if (!mek.quoted) return reply(`*Reply to any Image or Video, Sir.*`);
+        let mime = mek.quoted.mtype;
+        let pack = Config.STICKER_NAME || "Caseyrhodes XMD";
+        
+        if (mime === "imageMessage" || mime === "stickerMessage") {
+            let media = await mek.quoted.download();
+            let sticker = new Sticker(media, {
+                pack: pack, 
+                type: StickerTypes.FULL,
+                categories: ["🤩", "🎉"], 
+                id: "12345",
+                quality: 75, 
+                background: 'transparent',
+            });
+            const buffer = await sticker.toBuffer();
+            return conn.sendMessage(mek.chat, { sticker: buffer }, { quoted: mek });
+        } else {
+            return reply("*Uhh, Please reply to an image.*");
+        }
+    }
+);
 
-    await conn.sendMessage(from, imageMessage, { quoted: m });
-  } catch (error) {
-    console.error("Error:", error);
-    reply("اسکرین شاٹ لینے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔");
-  }
-});
+// Caseyrhodes tech 👻 
