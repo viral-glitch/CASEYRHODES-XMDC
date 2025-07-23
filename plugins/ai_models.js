@@ -50,7 +50,7 @@ async (conn, mek, m, { from, args, q, reply, react }) => {
             return reply("AI failed to respond. Please try again later.");
         }
 
-        await reply(`🤖 *CASEYRHODES XMD AI Response👻:*\n\n${data.message}`);
+        await reply(`🤖\`\`\`CASEYRHODES-XMD AI Response👻\`\`\`\n\n${data.message}`);
         await react("✅");
     } catch (e) {
         console.error("Error in AI command:", e);
