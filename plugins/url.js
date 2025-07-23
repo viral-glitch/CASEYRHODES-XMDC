@@ -8,7 +8,7 @@ const { cmd, commands } = require("../command");
 cmd({
   'pattern': "tourl",
   'alias': ["imgtourl", "imgurl", "url", "geturl", "upload"],
-  'react': '馃枃',
+  'react': '✅',
   'desc': "Convert media to Catbox URL",
   'category': "utility",
   'use': ".tourl [reply to media]",
@@ -62,10 +62,10 @@ cmd({
 
     // Send response
     await reply(
-      `*${mediaType} Uploaded Successfully*\n\n` +
+      `*${mediaType} ᴜᴘʟᴏᴀᴅᴇᴅ sᴜᴄᴄᴇsғᴜʟʟʏ ✅*\n\n` +
       `*Size:* ${formatBytes(mediaBuffer.length)}\n` +
       `*URL:* ${mediaUrl}\n\n` +
-      `> 漏 Uploaded by 饾櫧饾櫨饾殔饾櫚-饾殗饾櫦饾櫝 馃殌`
+      `> ᴜᴘʟᴏᴀᴅᴇᴅ ʙʏ ᴄᴀsᴇʏʀʜᴏᴅᴇs ᴛᴇᴄʜ 🌟`
     );
 
   } catch (error) {
