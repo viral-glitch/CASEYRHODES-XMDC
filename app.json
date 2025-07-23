@@ -193,8 +193,12 @@
       "description": "make it true if want goodbye and welcome message in groups.",
       "required": false,
       "value": "true"
+     },
+    "ANTICALL": {
+      "description": "Make it true if you want bot to block incoming calls.",
+      "required": false,
+      "value": "true"
     },
-
     "READ_MESSAGE": {
       "description": "Make it true if you want bot read your all sms just now.",
       "required": false,
