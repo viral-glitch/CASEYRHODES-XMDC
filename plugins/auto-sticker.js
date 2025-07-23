@@ -17,7 +17,7 @@ cmd({
             from,
             {
               sticker: { url: data[keyword] },
-              package: 'KHAN-MD'
+              package: 'CASEYRHODES-XMD'
             },
             { quoted: mek }
           );
