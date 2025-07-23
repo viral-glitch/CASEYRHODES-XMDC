@@ -27,7 +27,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 ┃ *👨‍💻𝖮ᴡɴᴇʀ* : *𝖬ʀ ᴄᴀsᴇʏʀʜᴏᴅᴇs*
 ┃ *🧬𝖵ᴇʀsɪᴏɴ* : *𝟣.𝟢.𝟢 𝖡𝖤𝖳𝖠*
 ╰──────────────────────┈⊷
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴄᴀsᴇʏʀʜᴏᴅᴇs`;
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴄᴀsᴇʏʀʜᴏᴅᴇs ᴛᴇᴄʜ`;
 
         // Send image + caption + audio combined
         await conn.sendMessage(from, { 
@@ -47,7 +47,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         // Attach audio within the same "quoted" message for grouping
         await conn.sendMessage(from, { 
-            audio: { url: 'https://files.catbox.moe/5df4ei.m4v' },
+            audio: { url: 'https://files.catbox.moe/dcxfi1.mp3' },
             mimetype: 'audio/mp4',
             ptt: true 
         }, { quoted: mek });
