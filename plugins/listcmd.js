@@ -40,7 +40,7 @@ cmd({
 ╰━━━━━━━━━━━━━━━━━━━━⬣\n\n${commandList.join('\n\n')}`;
 
     await Void.sendMessage(m.chat, {
-      image: { url: "https://files.catbox.moe/fgiecg.jpg" },
+      image: { url: "https://files.catbox.moe/y3j3kl.jpg" },
       caption,
       contextInfo: {
         forwardingScore: 999,
