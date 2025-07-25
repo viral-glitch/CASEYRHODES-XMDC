@@ -12,9 +12,9 @@ cmd({
 async (conn, mek, m, { from, quoted, sender, reply }) => {
     try {
         const songUrls = [
-            "https://files.catbox.moe/igdgw1.m4a",
-            "https://files.catbox.moe/65csuc.m4a",
-            "https://files.catbox.moe/lzgyrl.m4a"
+            "https://files.catbox.moe/dcxfi1.mp3",
+            "https://files.catbox.moe/ebkzu5.mp3",
+            "https://files.catbox.moe/iq4ouj.mp3"
             // Add more direct URLs here
         ];
 
@@ -32,7 +32,7 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
             message: {
                 contactMessage: {
                     displayName: "CASEYRHODES-XMD VERIFIED ✅",
-                    vcard: "BEGIN:VCARD\nVERSION:3.0\nFN:CASEYRHODES-XMD\nORG:CASEYRHODES;\nTEL;type=CELL;type=VOICE;waid=254112192119:+254112192119\nEND:VCARD"
+                    vcard: "BEGIN:VCARD\nVERSION:3.0\nFN:CASEYRHODES-XMD\nORG:CASEYRHODES;\nTEL;type=CELL;type=VOICE;waid=254700000000:+254700000000\nEND:VCARD"
                 }
             }
         };
