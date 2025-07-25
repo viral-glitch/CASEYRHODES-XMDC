@@ -11,7 +11,7 @@ const fakeContact = {
   message: {
     contactMessage: {
       displayName: "CASEYRHODES | CASEYRHODES-XMD",
-      vcard: `BEGIN:VCARD\nVERSION:3.0\nFN:CASEYRHODES | CASEYRHODES-XMD\nORG:CASEYRHODES-XMD;\nTEL;type=CELL;type=VOICE;waid=254112192119:+254 112 192119\nEND:VCARD`,
+      vcard: `BEGIN:VCARD\nVERSION:3.0\nFN:CASEYRHODES | CASEYRHODES-XMD\nORG:CASEYRHODES-XMD;\nTEL;type=CELL;type=VOICE;waid=254700000000:+2547 000 00000\nEND:VCARD`,
       jpegThumbnail: Buffer.alloc(0)
     }
   }
