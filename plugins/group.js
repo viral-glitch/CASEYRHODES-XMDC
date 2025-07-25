@@ -1187,7 +1187,7 @@ cmd(_0x10f253, async (_0x100559, _0x26bd3b, _0x19d9e3, {
   }
 });
 const _0x53a4af = {
-  'pattern': "tagall",
+  'pattern': "all",
   'react': '🔊',
   'alias': ["f_tagall"],
   'desc': "To Tag all Members",
